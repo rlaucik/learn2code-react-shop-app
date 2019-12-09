@@ -12,10 +12,10 @@ export function ProductItem(props) {
     const { product, categories } = props;
     return (
         <div style={style}>
-            <Image src={props.product.thumbnail} />
-            <p><strong>{props.product.name}</strong></p>
-            <p>Category: {getCategoryNameById(props.categories, props.product.categoryId)}</p>
-            <p>Price: {props.product.price} €</p>
+            <Image src={product.thumbnail} />
+            <p><strong>{product.name}</strong></p>
+            <p>Category: {getCategoryNameById(categories, product.categoryId)}</p>
+            <p>Price: {product.price} €</p>
         </div>
     );
 }
