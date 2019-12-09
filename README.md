@@ -1,3 +1,8 @@
+Ak chces spustit jednotlive cvicenia, odpoznamkuj v App.js jednotlive komponenty a zapoznamkuj ostatne.
+
+Nizsie ide povodne readme z create-react-app 👇
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
