@@ -1,46 +1,36 @@
 import React from 'react';
 import { products, categories } from './shopData';
-import { ProductItem } from './ProductItem';
+import { ProductCategoriesDropdown } from './ProductCategoriesDropdown';
+import { ProductList } from './ProductList';
 
 export class ProductCatalogFiltering extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            currenctCategoryId: "0",
+            currentCategoryId: "0",
         }
     }
     render() {
-        const filteredProducts = getProductsFromCategory(products, this.state.currenctCategoryId);
+        const filteredProducts = getProductsFromCategory(products, this.state.currentCategoryId);
         return (
             <>
                 <h1>My shop</h1>
-                <select
-                    style={{ marginBottom: '10px' }}
-                    onChange={this.handleCategoryChange}
-                >   
-                    <option value="0">
-                        All products
-                    </option>
-                    {categories.map(category => 
-                        <option
-                            key={category.id}
-                            value={category.id}
-                        >
-                            {category.name}
-                        </option>
-                    )}
-                </select>
-                <div>
-                    {filteredProducts.map(product => <ProductItem key={product.name} product={product} categories={categories} />)}
-                </div>
+                <ProductCategoriesDropdown
+                    onChange={this.handleCategoryChange} 
+                    categories={categories}
+                />
+                <ProductList
+                    products={filteredProducts}
+                    categories={categories}
+                />
             </>
         );
     }
 
     handleCategoryChange = (event) => {
         this.setState({
-            currenctCategoryId: event.target.value,
+            currentCategoryId: event.target.value,
         });
     }
 }

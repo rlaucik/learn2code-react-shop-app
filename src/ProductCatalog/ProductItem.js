@@ -10,6 +10,9 @@ const style = {
 
 export function ProductItem(props) {
     const { product, categories } = props;
+    if (!product.thumbnail) {
+        return null;
+    }
     return (
         <div style={style}>
             <Image src={product.thumbnail} />

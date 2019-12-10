@@ -4,6 +4,7 @@ import { ProductCatalog } from './ProductCatalog/ProductCatalog';
 import { ProductCatalogFiltering } from './ProductCatalog/ProductCatalogFiltering';
 import { StateCounter } from './StateCounter';
 import { RandomName } from './RandomName';
+import { StateCounterConditional } from './StateCounterConditional';
 
 export function App() {
   return <ProductCatalogFiltering />
@@ -23,4 +24,8 @@ export function App() {
 
 // export function App() {
 //     return <StateCounter />
+// }
+
+// export function App() {
+//     return <StateCounterConditional />
 // }

@@ -10,6 +10,10 @@ export const categories = [
     {
         "name": "Other",
         "id": "3"
+    },
+    {
+        "name": "Apple Watch",
+        "id": "4"
     }
 ];
 
@@ -35,7 +39,6 @@ export const products = [
     {
         "name": "MacBook Pro 13\" i5 2.3GHz 8GB 128GB Space Gray SK",
         "price": 1225.00,
-        "thumbnail": "https://www.istores.sk/macbook-pro-13-i5-2-3ghz-8gb-128gb-space-gray-sk-galeria-3-small_ies1000199.jpg",
         "categoryId": "2"
     },
     {
