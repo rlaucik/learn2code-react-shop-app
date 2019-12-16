@@ -8,19 +8,36 @@ const style = {
     marginBottom: "20px",
 };
 
-export function ProductItem(props) {
-    const { product, categories } = props;
-    if (!product.thumbnail) {
-        return null;
+export class ProductItem extends React.Component {
+    render() {
+        const { product, categories, basket } = this.props;
+        if (!product.thumbnail) {
+            return null;
+        }
+        return (
+            <div style={style}>
+                <Image src={product.thumbnail} />
+                <p><strong>{product.name}</strong></p>
+                <p>Category: {getCategoryNameById(categories, product.categoryId)}</p>
+                <p>Price: {product.price} €</p>
+                <button
+                    id="mojbutton"
+                    value={product.name}
+                    onClick={this.onAddToBasket}
+                >
+                    {getAddToBasketName(basket, product.name)}
+                </button>
+            </div>
+        );
     }
-    return (
-        <div style={style}>
-            <Image src={product.thumbnail} />
-            <p><strong>{product.name}</strong></p>
-            <p>Category: {getCategoryNameById(categories, product.categoryId)}</p>
-            <p>Price: {product.price} €</p>
-        </div>
-    );
+
+    onAddToBasket = () => {
+        this.props.onAddToBasket(this.props.product.name);
+    }
+}
+
+const getAddToBasketName = (basket, productName) => {
+    return basket[productName] ? "In basket, add more" : "Add to basket";
 }
 
 function Image(props) {

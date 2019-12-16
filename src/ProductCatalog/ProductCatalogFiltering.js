@@ -2,6 +2,7 @@ import React from 'react';
 import { products, categories } from './shopData';
 import { ProductCategoriesDropdown } from './ProductCategoriesDropdown';
 import { ProductList } from './ProductList';
+import { Basket } from './Basket';
 
 export class ProductCatalogFiltering extends React.Component {
     constructor(props) {
@@ -9,6 +10,7 @@ export class ProductCatalogFiltering extends React.Component {
 
         this.state = {
             currentCategoryId: "0",
+            basket: {},
         }
     }
     render() {
@@ -23,6 +25,12 @@ export class ProductCatalogFiltering extends React.Component {
                 <ProductList
                     products={filteredProducts}
                     categories={categories}
+                    basket={this.state.basket}
+                    onAddToBasket={this.addToBasket}
+                />
+                <Basket
+                    basket={this.state.basket}
+                    onProductRemove={this.removeFromBasket}
                 />
             </>
         );
@@ -33,6 +41,36 @@ export class ProductCatalogFiltering extends React.Component {
             currentCategoryId: event.target.value,
         });
     }
+
+    addToBasket = (productName) => {
+        const basket = getUpdatedBasketAfterAdd(this.state.basket, productName);
+        this.setState({
+            basket,
+        });
+    }
+
+    removeFromBasket = (productName) => {
+        const basket = getUpdatedBasketAfterRemove(this.state.basket, productName)
+        this.setState({
+            basket,
+        });
+    }
+}
+
+const getUpdatedBasketAfterAdd = (basket, productName) => {
+    const amount = basket[productName] ? basket[productName] + 1 : 1;
+    return {
+        ...basket,
+        [productName]: amount,
+    };
+}
+
+const getUpdatedBasketAfterRemove = (basket, productName) => {
+    const {
+        [productName]: deletedProduct,
+        ...updatedBasket
+    } = basket;
+    return updatedBasket;
 }
 
 const getProductsFromCategory = (products, categoryId) => {
