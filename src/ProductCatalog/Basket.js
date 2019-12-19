@@ -20,16 +20,14 @@ export const Basket = ({ basket, onProductRemove }) => {
     return (
         <div style={style}>
             <h2>Basket content</h2>
-            {
-                basketItems.map(productName => 
-                    <BasketItem
-                        key={productName}
-                        productName={productName}
-                        productAmount={basket[productName]}
-                        onProductRemove={onProductRemove}
-                    />
-                )
-            }
+            {basketItems.map(productName => 
+                <BasketItem
+                    key={productName}
+                    productName={productName}
+                    productAmount={basket[productName]}
+                    onProductRemove={onProductRemove}
+                />
+            )}
             <hr/>
             <p><strong>TOTAL: {calculateTotal(basket)} €</strong></p>
         </div>
