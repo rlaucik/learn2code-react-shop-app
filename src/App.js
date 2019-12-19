@@ -8,24 +8,9 @@ import { StateCounterConditional } from './StateCounterConditional';
 
 export function App() {
   return <ProductCatalogFiltering />
+  return <ProductCatalog />
+  return <RandomName />
+  return <HelloWorldSetState />
+  return <StateCounter />
+  return <StateCounterConditional />
 }
-
-// export function App() {
-//     return <ProductCatalog />
-// }
-
-// export function App() {
-//   return <RandomName />
-// }
-
-// export function App() {
-//     return <HelloWorldSetState />
-// }
-
-// export function App() {
-//     return <StateCounter />
-// }
-
-// export function App() {
-//     return <StateCounterConditional />
-// }
