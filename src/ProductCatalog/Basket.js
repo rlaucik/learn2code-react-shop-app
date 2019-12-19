@@ -11,7 +11,7 @@ const style = {
     border: "5px solid silver",
 }
 
-export const Basket = ({ basket, onProductRemove }) => {
+export const Basket = ({ basket, onProductRemove, onOrderButtonClick }) => {
     const basketItems = Object.keys(basket);
     if (basketItems.length < 1) {
         return null;
@@ -30,6 +30,7 @@ export const Basket = ({ basket, onProductRemove }) => {
             )}
             <hr/>
             <p><strong>TOTAL: {calculateTotal(basket)} €</strong></p>
+            <p><button onClick={onOrderButtonClick}>Objednať</button></p>
         </div>
     );
 }

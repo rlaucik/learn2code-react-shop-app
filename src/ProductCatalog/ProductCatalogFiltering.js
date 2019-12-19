@@ -31,6 +31,7 @@ export class ProductCatalogFiltering extends React.Component {
                 <Basket
                     basket={this.state.basket}
                     onProductRemove={this.removeFromBasket}
+                    onOrderButtonClick={this.props.onOrderButtonClick}
                 />
             </>
         );
