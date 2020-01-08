@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { SectionWrapper } from '../SectionWrapper';
+import { ValidatedInput } from './ValidatedInput';
 
 const validations = {
     name: /\w+\s\w+/,
@@ -99,67 +99,3 @@ export class OrderForm extends React.Component {
     onFormSent = () => { this.setState({ isFormSent: true }) }
 
 }
-
-const ValidatedInput = ({ label, onChange, isFormSent, value, formValidation }) => (
-        <fieldset>
-            <p>
-                <label htmlFor={label}>
-                    {label}
-                </label>
-            </p>
-            <input
-                id={label}
-                type="text"
-                value={value}
-                onChange={onChange}
-            />
-            <ValidationMessage
-                formValidation={formValidation}
-                isFormSent={isFormSent}
-                label={label}
-                value={value}
-            />
-            <ValidationMessage
-                formValidation={23}
-            />
-        </fieldset>
-);
-
-ValidatedInput.propTypes = {
-    label: PropTypes.string.isRequired,
-    onChange: PropTypes.bool,
-    isFormSent: PropTypes.bool.isRequired,
-    value: PropTypes.string,
-    formValidation: PropTypes.instanceOf(RegExp),
-};
-
-const validationMessageStyle = {
-    background: 'red',
-    color: 'white',
-    padding: '10px',
-}
-
-const ValidationMessage = ({ value, label, isFormSent, formValidation }) => {
-    if (!value && isFormSent) {
-        return (
-            <p style={validationMessageStyle}>
-                Prosím, vyplňte povinné pole {label}
-            </p>
-        );
-    }
-    if (formValidation && !formValidation.test(value) && isFormSent) {
-        return (
-            <p style={validationMessageStyle}>
-                Vložená hodnota je v nesprávnom tvare!
-            </p>
-        );
-    }
-    return null;
-}
-
-ValidationMessage.propTypes = {
-    value: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    isFormSent: PropTypes.bool.isRequired,
-    formValidation: PropTypes.instanceOf(RegExp),
-};
