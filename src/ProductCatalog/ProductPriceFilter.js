@@ -6,9 +6,9 @@ export class ProductPriceFilter extends React.Component {
         return (
             <div>
                 <strong>Price:</strong><br/>
-                <label for="filter-from">from </label>
+                <label htmlFor="filter-from">from </label>
                 <input id="filter-from" onChange={this.onChangeFrom} />
-                <label for="filter-to">to </label>
+                <label htmlFor="filter-to">to </label>
                 <input id="filter-to" onChange={this.onChangeTo} />
             </div>
         );
