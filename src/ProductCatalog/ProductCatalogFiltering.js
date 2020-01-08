@@ -1,8 +1,11 @@
 import React from 'react';
 import { products, categories } from './shopData';
 import { ProductCategoriesDropdown } from './ProductCategoriesDropdown';
+import { ProductPriceFilter } from './ProductPriceFilter';
+import { ProductSearchFilter } from './ProductSearchFilter';
 import { ProductList } from './ProductList';
 import { Basket } from './Basket';
+import { productsFilterCombined } from './productsFilterService'
 
 export class ProductCatalogFiltering extends React.Component {
     constructor(props) {
@@ -11,16 +14,34 @@ export class ProductCatalogFiltering extends React.Component {
         this.state = {
             currentCategoryId: "0",
             basket: {},
+            priceFrom: null,
+            priceTo: null,
+            searchQuery: '',
         }
     }
     render() {
-        const filteredProducts = getProductsFromCategory(products, this.state.currentCategoryId);
+        const { currentCategoryId, priceFrom, priceTo, searchQuery } = this.state;
+        const filteredProducts = productsFilterCombined(
+            products,
+            currentCategoryId,
+            priceFrom,
+            priceTo,
+            searchQuery,
+        );
+
         return (
             <>
                 <h1>My shop</h1>
                 <ProductCategoriesDropdown
-                    onChange={this.handleCategoryChange} 
+                    onChange={this.handleCategoryChange}
                     categories={categories}
+                />
+                <ProductPriceFilter
+                    onChangeFrom={this.handlePriceFromChange}
+                    onChangeTo={this.handlePriceToChange}
+                />
+                <ProductSearchFilter
+                    onSearch={this.handleSearch}
                 />
                 <ProductList
                     products={filteredProducts}
@@ -37,10 +58,28 @@ export class ProductCatalogFiltering extends React.Component {
         );
     }
 
-    handleCategoryChange = (event) => {
+    handleCategoryChange = event => {
         this.setState({
             currentCategoryId: event.target.value,
         });
+    }
+
+    handlePriceFromChange = event => {
+        this.setState({
+            priceFrom: event.target.value,
+        });
+    }
+
+    handlePriceToChange = event => {
+        this.setState({
+            priceTo: event.target.value,
+        });
+    }
+
+    handleSearch = event => {
+        this.setState({
+            searchQuery: event.target.value,
+        })
     }
 
     addToBasket = (productName) => {
@@ -72,11 +111,4 @@ const getUpdatedBasketAfterRemove = (basket, productName) => {
         ...updatedBasket
     } = basket;
     return updatedBasket;
-}
-
-const getProductsFromCategory = (products, categoryId) => {
-    if (categoryId === "0") {
-        return products;
-    }
-    return products.filter(product => categoryId === product.categoryId);
 }
