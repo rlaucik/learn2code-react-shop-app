@@ -1,10 +1,13 @@
 import React from 'react';
 import { ProductItem } from './ProductItem';
+import { SectionWrapper } from './SectionWrapper';
 
 export const ProductList = (props) => {
     const { products, categories, basket } = props;
     if (products.length === 0) {
-        return <p>No products found for this category :(</p>
+        return <SectionWrapper>
+            No products found for this selection :(
+        </SectionWrapper>
     }
     return (
         <div>

@@ -1,12 +1,5 @@
 import React from 'react';
-
-const style = {
-    minWidth: "500px",
-    float: "left",
-    clear: "both",
-    border: "5px solid silver",
-    marginBottom: "20px",
-};
+import { SectionWrapper } from './SectionWrapper';
 
 export class ProductItem extends React.Component {
     render() {
@@ -15,7 +8,7 @@ export class ProductItem extends React.Component {
             return null;
         }
         return (
-            <div style={style}>
+            <SectionWrapper>
                 <Image src={product.thumbnail} />
                 <p><strong>{product.name}</strong></p>
                 <p>Category: {getCategoryNameById(categories, product.categoryId)}</p>
@@ -27,7 +20,7 @@ export class ProductItem extends React.Component {
                 >
                     {getAddToBasketName(basket, product.name)}
                 </button>
-            </div>
+            </SectionWrapper>
         );
     }
 

@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { SectionWrapper } from '../SectionWrapper';
 
 const validations = {
     name: /\w+\s\w+/,
@@ -13,7 +16,6 @@ const defaultFormState = {
     zip: '',
     isFormSent: false,
 }
-
 
 export class OrderForm extends React.Component {
     constructor() {
@@ -44,7 +46,7 @@ export class OrderForm extends React.Component {
         }
 
         return (
-            <div style={{maxWidth: '500px'}}>
+            <SectionWrapper>
                 <ValidatedInput
                     label="Meno a priezvisko"
                     isFormSent={isFormSent}
@@ -74,17 +76,17 @@ export class OrderForm extends React.Component {
                 />
                 <p>
                     <button
-                        onClick={this.onFormSent}
-                    >
-                        Odoslať
-                    </button>
-                    <button
                         onClick={this.onFormReset}
                     >
                         Vymazať formulár
                     </button>
+                    <button
+                        onClick={this.onFormSent}
+                    >
+                        Odoslať
+                    </button>
                 </p>
-            </div>
+            </SectionWrapper>
         );
     }
 
@@ -93,32 +95,43 @@ export class OrderForm extends React.Component {
     onChangeAddress = event => { this.setState({ address: event.target.value, isFormSent: false }) }
     onChangeZIP = event => { this.setState({ zip: event.target.value, isFormSent: false }) }
 
-    onFormReset = () => { this.setState(defaultFormState)}
+    onFormReset = () => { this.setState(defaultFormState) }
     onFormSent = () => { this.setState({ isFormSent: true }) }
 
 }
 
 const ValidatedInput = ({ label, onChange, isFormSent, value, formValidation }) => (
-    <fieldset>
-        <p>
-        <label htmlFor={label}>
-            {label}
-        </label>
-        </p>
-        <input
-            id={label}
-            type="text"
-            value={value}
-            onChange={onChange}
-        />
-        <ValidationMessage
-            formValidation={formValidation}
-            isFormSent={isFormSent}
-            label={label}
-            value={value}
-        />
-    </fieldset>
+        <fieldset>
+            <p>
+                <label htmlFor={label}>
+                    {label}
+                </label>
+            </p>
+            <input
+                id={label}
+                type="text"
+                value={value}
+                onChange={onChange}
+            />
+            <ValidationMessage
+                formValidation={formValidation}
+                isFormSent={isFormSent}
+                label={label}
+                value={value}
+            />
+            <ValidationMessage
+                formValidation={23}
+            />
+        </fieldset>
 );
+
+ValidatedInput.propTypes = {
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.bool,
+    isFormSent: PropTypes.bool.isRequired,
+    value: PropTypes.string,
+    formValidation: PropTypes.instanceOf(RegExp),
+};
 
 const validationMessageStyle = {
     background: 'red',
@@ -143,3 +156,10 @@ const ValidationMessage = ({ value, label, isFormSent, formValidation }) => {
     }
     return null;
 }
+
+ValidationMessage.propTypes = {
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    isFormSent: PropTypes.bool.isRequired,
+    formValidation: PropTypes.instanceOf(RegExp),
+};

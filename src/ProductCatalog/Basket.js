@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { products } from './shopData';
 
 const style = {
@@ -35,6 +37,12 @@ export const Basket = ({ basket, onProductRemove, onOrderButtonClick }) => {
     );
 }
 
+Basket.propTypes = {
+    basket: PropTypes.object,
+    onProductRemove: PropTypes.func,
+    onOrderButtonClick: PropTypes.func,
+};
+
 export class BasketItem extends React.Component {
     style = {
         border: "0",
@@ -62,6 +70,11 @@ export class BasketItem extends React.Component {
     onProductRemove = () => {
         this.props.onProductRemove(this.props.productName);
     }
+}
+
+BasketItem.propTypes = {
+    productName: PropTypes.string,
+    productAmount: PropTypes.number,
 }
 
 const calculateTotal = (basket) =>

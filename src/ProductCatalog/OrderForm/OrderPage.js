@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { OrderForm } from './OrderForm';
 
 export const OrderPage = ({ onBackToShopClick }) => (
@@ -14,3 +16,7 @@ export const OrderPage = ({ onBackToShopClick }) => (
         <OrderForm />
     </>
 );
+
+OrderPage.propTypes = {
+    onBackToShopClick: PropTypes.func.isRequired,
+};

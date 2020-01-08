@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { products, categories } from './shopData';
 import { ProductCategoriesDropdown } from './ProductCategoriesDropdown';
 import { ProductPriceFilter } from './ProductPriceFilter';
@@ -36,12 +38,12 @@ export class ProductCatalogFiltering extends React.Component {
                     onChange={this.handleCategoryChange}
                     categories={categories}
                 />
+                <ProductSearchFilter
+                    onChange={this.handleSearch}
+                />
                 <ProductPriceFilter
                     onChangeFrom={this.handlePriceFromChange}
                     onChangeTo={this.handlePriceToChange}
-                />
-                <ProductSearchFilter
-                    onSearch={this.handleSearch}
                 />
                 <ProductList
                     products={filteredProducts}
@@ -96,6 +98,10 @@ export class ProductCatalogFiltering extends React.Component {
         });
     }
 }
+
+ProductCatalogFiltering.propTypes = {
+    onOrderButtonClick: PropTypes.func,
+};
 
 const getUpdatedBasketAfterAdd = (basket, productName) => {
     const amount = basket[productName] ? basket[productName] + 1 : 1;
