@@ -1,22 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from '@reach/router';
 
 import { OrderForm } from './OrderForm';
 
-export const OrderPage = ({ onBackToShopClick }) => (
+export const OrderPage = () => (
     <>
-        <h1>Objednávka</h1>
+        <h2>Order Form</h2>
         <p>
-            <button
-                onClick={onBackToShopClick}
-            >
-                Späť do e-shopu
-            </button>
+            <Link
+                to="/products"
+            > {'<<<'} Back to shop
+            </Link>
         </p>
         <OrderForm />
     </>
 );
-
-OrderPage.propTypes = {
-    onBackToShopClick: PropTypes.func.isRequired,
-};

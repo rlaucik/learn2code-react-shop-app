@@ -6,7 +6,7 @@ import { ProductCategoriesDropdown } from './ProductCategoriesDropdown';
 import { ProductPriceFilter } from './ProductPriceFilter';
 import { ProductSearchFilter } from './ProductSearchFilter';
 import { ProductList } from './ProductList';
-import { Basket } from './Basket';
+import { Basket } from './Basket/Basket';
 import { productsFilterCombined } from './productsFilterService'
 
 export class ProductCatalogFiltering extends React.Component {
@@ -33,7 +33,7 @@ export class ProductCatalogFiltering extends React.Component {
 
         return (
             <>
-                <h1>My shop</h1>
+                <h2>Our products</h2>
                 <ProductCategoriesDropdown
                     onChange={this.handleCategoryChange}
                     categories={categories}
