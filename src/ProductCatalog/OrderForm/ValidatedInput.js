@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { ValidationMessage } from './ValidationMessage';
 
-const ValidatedInput = ({ label, onChange, isFormSent, value, formValidation }) => (
+export const ValidatedInput = ({ label, onChange, isFormSent, value, formValidation }) => (
     <fieldset>
         <p>
             <label htmlFor={label}>
@@ -27,7 +27,7 @@ const ValidatedInput = ({ label, onChange, isFormSent, value, formValidation }) 
 
 ValidatedInput.propTypes = {
     label: PropTypes.string.isRequired,
-    onChange: PropTypes.bool,
+    onChange: PropTypes.func,
     isFormSent: PropTypes.bool.isRequired,
     value: PropTypes.string,
     formValidation: PropTypes.instanceOf(RegExp),

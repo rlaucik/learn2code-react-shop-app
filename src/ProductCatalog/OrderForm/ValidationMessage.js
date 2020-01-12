@@ -7,7 +7,7 @@ const style = {
     padding: '10px',
 }
 
-const ValidationMessage = ({ value, label, isFormSent, formValidation }) => {
+export const ValidationMessage = ({ value, label, isFormSent, formValidation }) => {
     if (!value && isFormSent) {
         return (
             <p style={style}>

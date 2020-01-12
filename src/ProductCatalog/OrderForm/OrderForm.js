@@ -2,6 +2,8 @@ import React from 'react';
 
 import { SectionWrapper } from '../SectionWrapper';
 import { ValidatedInput } from './ValidatedInput';
+import { OrderFormSuccess } from './OrderFormSuccess';
+import { FormControlButtons } from './FormControlButtons';
 
 const validations = {
     name: /\w+\s\w+/,
@@ -36,13 +38,11 @@ export class OrderForm extends React.Component {
             field => validations[field].test(this.state[field])
         );
         if (isFormSent && name && email && address && zip && areAllFieldsInValidFormat) {
-            return (
-                <>
-                    <p>
-                        Vážený {name}, prijali sme vašu objednávku na adresu {address}, potvrdenie vám príde na e-mail {email}
-                    </p>
-                </>
-            );
+            return <OrderFormSuccess
+                name={name}
+                email={email}
+                address={address}
+            />
         }
 
         return (
@@ -74,18 +74,10 @@ export class OrderForm extends React.Component {
                     value={zip}
                     formValidation={validations.zip}
                 />
-                <p>
-                    <button
-                        onClick={this.onFormReset}
-                    >
-                        Vymazať formulár
-                    </button>
-                    <button
-                        onClick={this.onFormSent}
-                    >
-                        Odoslať
-                    </button>
-                </p>
+                <FormControlButtons 
+                    onSend={this.onFormSent}
+                    onReset={this.onFormReset}
+            />
             </SectionWrapper>
         );
     }
