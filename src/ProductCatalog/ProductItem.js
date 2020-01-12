@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from '@reach/router';
+
 import { SectionWrapper } from './SectionWrapper';
+import { getCategoryNameById } from './ProductService';
 
 export class ProductItem extends React.Component {
     render() {
@@ -10,7 +13,7 @@ export class ProductItem extends React.Component {
         return (
             <SectionWrapper>
                 <Image src={product.thumbnail} />
-                <p><strong>{product.name}</strong></p>
+                <Link to={`/product/${product.id}`}><strong>{product.name}</strong></Link>
                 <p>Category: {getCategoryNameById(categories, product.categoryId)}</p>
                 <p>Price: {product.price} €</p>
                 <button
@@ -35,10 +38,6 @@ const getAddToBasketName = (basket, productName) => {
 
 function Image(props) {
     return (
-        <img src={props.src} width="150" style={{ float: 'left' }} />
+        <img src={props.src} width="150" style={{ float: 'left' }} alt="Product" />
     )
-}
-
-function getCategoryNameById(categories, productCategoryId) {
-    return categories.filter(category => category.id === productCategoryId)[0].name;
 }
