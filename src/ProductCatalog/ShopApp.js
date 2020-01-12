@@ -1,40 +1,25 @@
 import React from 'react';
+import { Router } from '@reach/router';
+
 import { ProductCatalogFiltering } from './ProductCatalogFiltering';
 import { OrderPage } from './OrderForm/OrderPage';
+import { ShopMenu } from './ShopMenu';
+import { PaymentDeliveryInfo } from './PaymentDeliveryInfo';
 
-export class ShopApp extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            isOrdering: false,
-        };
-    }
-    
-    render() {
-        if (this.state.isOrdering) {
-            return (
-                <OrderPage
-                    onBackToShopClick={this.onBackToShopClick}
-                />
-            );
-        }
-
-        return (
+export const ShopApp = () => (
+    <>
+        <h1>My shop</h1>
+        <ShopMenu />
+        <Router>
             <ProductCatalogFiltering
-                onOrderButtonClick={this.onOrderButtonClick}
+                path="/products"
             />
-        );
-    }
-
-    onOrderButtonClick = () => {
-        this.setState({
-            isOrdering: true,
-        })
-    }
-
-    onBackToShopClick = () => {
-        this.setState({
-            isOrdering: false,
-        });
-    }
-}
+            <OrderPage
+                path="/order"
+            />
+            <PaymentDeliveryInfo
+                path="/payment-delivery"
+            />
+        </Router>
+    </>
+);

@@ -1,0 +1,14 @@
+nav a {
+    padding: 0.5em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-right: 1ex;
+    font-weight: bold;
+    outline: 1px solid black;
+    color: black;
+}
+nav a:hover {
+    background: black;
+    color: white;
+    text-decoration: underline;
+}
