@@ -22,7 +22,7 @@ function isProductWithinPriceRange(
     return product.price >= priceFrom && product.price <= priceTo;
 }
 
-function isProductInCategory(product, categoryId) {
+export function isProductInCategory(product, categoryId) {
     if (categoryId === "0") {
         return true;
     }

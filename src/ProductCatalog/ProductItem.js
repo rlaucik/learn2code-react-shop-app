@@ -32,12 +32,14 @@ export class ProductItem extends React.Component {
     }
 }
 
-const getAddToBasketName = (basket, productName) => {
+export const getAddToBasketName = (basket, productName) => {
     return basket[productName] ? "In basket, add more" : "Add to basket";
 }
 
-function Image(props) {
-    return (
-        <img src={props.src} width="150" style={{ float: 'left' }} alt="Product" />
-    )
-}
+export const Image = props =>
+    <img
+        src={props.src}
+        width="150"
+        style={{ float: 'left' }}
+        alt="Product"
+    />;

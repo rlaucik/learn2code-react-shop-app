@@ -4,6 +4,7 @@ import { SectionWrapper } from '../SectionWrapper';
 import { ValidatedInput } from './ValidatedInput';
 import { OrderFormSuccess } from './OrderFormSuccess';
 import { FormControlButtons } from './FormControlButtons';
+import { FilteredInput } from './FilteredInput';
 
 const validations = {
     name: /\w+\s\w+/,
@@ -66,8 +67,7 @@ export class OrderForm extends React.Component {
                     isFormSent={isFormSent}
                     onChange={this.onChangeAddress}
                     value={address}
-                />
-                <ValidatedInput
+                /><FilteredInput
                     label="PSČ"
                     isFormSent={isFormSent}
                     onChange={this.onChangeZIP}
