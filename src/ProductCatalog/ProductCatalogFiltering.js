@@ -18,10 +18,39 @@ export class ProductCatalogFiltering extends React.Component {
             priceFrom: null,
             priceTo: null,
             searchQuery: '',
+            isLoading: true,
         }
     }
+
+    componentDidMount() {
+        fetch('http://l2c.radomeer.sk/productsDasta.php')
+        .then(response => response.json())
+        .then(
+            (result) => {
+                this.setState({
+                    isLoading: false,
+                    products: result,
+                });
+            },
+            (error) => {
+                console.log(error);
+                this.setState({
+                    isLoading: false,
+                    hasError: true,
+                });
+            }
+        );
+    }
+
     render() {
-        const { currentCategoryId, priceFrom, priceTo, searchQuery } = this.state;
+        const {
+            currentCategoryId,
+            priceFrom,
+            priceTo,
+            searchQuery,
+            isLoading,
+            hasError
+        } = this.state;
         const filteredProducts = productsFilterCombined(
             products,
             currentCategoryId,
@@ -29,7 +58,16 @@ export class ProductCatalogFiltering extends React.Component {
             priceTo,
             searchQuery,
         );
-
+        if (isLoading) {
+            return (
+                <div className="loader">Loading</div>
+            );
+        }
+        if (hasError) {
+            return (
+                <p>Sorry, an error occured :( Please, try to reload this page.</p>
+            );
+        }
         return (
             <>
                 <h2>Our products</h2>

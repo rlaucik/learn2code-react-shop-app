@@ -5,3 +5,10 @@ a {
 a:hover {
   text-decoration: none;
 }
+
+.loader {
+  background: url('./assets/ajax-loader.gif') no-repeat 20px center;
+  text-indent: -99999px;
+  overflow: hidden;
+  margin-top: 2em;
+}
