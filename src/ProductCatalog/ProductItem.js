@@ -3,6 +3,7 @@ import { Link } from '@reach/router';
 
 import { SectionWrapper } from './SectionWrapper';
 import { getCategoryNameById } from './ProductService';
+import { LanguageContext } from './LanguageContext';
 
 export class ProductItem extends React.Component {
     render() {
@@ -10,6 +11,7 @@ export class ProductItem extends React.Component {
         if (!product.thumbnail) {
             return null;
         }
+        const translations = this.context;
         return (
             <SectionWrapper>
                 <Image src={product.thumbnail} />
@@ -21,7 +23,7 @@ export class ProductItem extends React.Component {
                     value={product.name}
                     onClick={this.onAddToBasket}
                 >
-                    {getAddToBasketName(basket, product.name)}
+                    {getAddToBasketName(basket, product.name, translations)}
                 </button>
             </SectionWrapper>
         );
@@ -32,8 +34,10 @@ export class ProductItem extends React.Component {
     }
 }
 
-export const getAddToBasketName = (basket, productName) => {
-    return basket[productName] ? "In basket, add more" : "Add to basket";
+ProductItem.contextType = LanguageContext;
+
+export const getAddToBasketName = (basket, productName, translations) => {
+    return basket[productName] ? translations["In basket, add more"] : translations["Add to basket"];
 }
 
 export const Image = props =>

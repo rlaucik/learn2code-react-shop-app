@@ -7,6 +7,7 @@ import { ProductSearchFilter } from './ProductSearchFilter';
 import { ProductList } from './ProductList';
 import { Basket } from './Basket/Basket';
 import { productsFilterCombined } from './productsFilterService'
+import { LanguageContext } from './LanguageContext';
 
 export class ProductCatalogFiltering extends React.Component {
     constructor(props) {
@@ -18,12 +19,13 @@ export class ProductCatalogFiltering extends React.Component {
             priceFrom: null,
             priceTo: null,
             searchQuery: '',
+            products: [],
             isLoading: true,
-        }
+        };
     }
 
     componentDidMount() {
-        fetch('http://l2c.radomeer.sk/productsDasta.php')
+        fetch('http://l2c.radomeer.sk/productsData.php')
         .then(response => response.json())
         .then(
             (result) => {
@@ -68,30 +70,31 @@ export class ProductCatalogFiltering extends React.Component {
                 <p>Sorry, an error occured :( Please, try to reload this page.</p>
             );
         }
+        const translations = this.context;
         return (
-            <>
-                <h2>Our products</h2>
-                <ProductCategoriesDropdown
-                    onChange={this.handleCategoryChange}
-                    categories={categories}
-                />
-                <ProductSearchFilter
-                    onChange={this.handleSearch}
-                />
-                <ProductPriceFilter
-                    onChangeFrom={this.handlePriceFromChange}
-                    onChangeTo={this.handlePriceToChange}
-                />
-                <ProductList
-                    products={filteredProducts}
-                    categories={categories}
-                    basket={this.state.basket}
-                    onAddToBasket={this.addToBasket}
-                />
-                <Basket
-                    basket={this.state.basket}
-                    onProductRemove={this.removeFromBasket}
-                />
+                <>
+                <h2>{translations['Our products']}</h2>
+                    <ProductCategoriesDropdown
+                        onChange={this.handleCategoryChange}
+                        categories={categories}
+                    />
+                    <ProductSearchFilter
+                        onChange={this.handleSearch}
+                    />
+                    <ProductPriceFilter
+                        onChangeFrom={this.handlePriceFromChange}
+                        onChangeTo={this.handlePriceToChange}
+                    />
+                    <ProductList
+                        products={filteredProducts}
+                        categories={categories}
+                        basket={this.state.basket}
+                        onAddToBasket={this.addToBasket}
+                    />
+                    <Basket
+                        basket={this.state.basket}
+                        onProductRemove={this.removeFromBasket}
+                    />
             </>
         );
     }
@@ -150,3 +153,5 @@ const getUpdatedBasketAfterRemove = (basket, productName) => {
     } = basket;
     return updatedBasket;
 }
+
+ProductCatalogFiltering.contextType = LanguageContext;
